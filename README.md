@@ -10,7 +10,7 @@ Download the plugin and install required gems:
 
 ```console
 cd /path/to/redmine/plugins
-git clone https://github.com/applewu/redmine_omniauth_gitlab
+git clone https://github.com/AKSW/redmine_omniauth_gitlab
 cd /path/to/redmine
 bundle install
 ```
