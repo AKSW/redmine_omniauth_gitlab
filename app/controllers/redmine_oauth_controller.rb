@@ -8,7 +8,7 @@ class RedmineOauthController < AccountController
   def oauth_gitlab
     if Setting.plugin_redmine_omniauth_gitlab[:oauth_authentification]
       session[:back_url] = params[:back_url]
-      redirect_to oauth_client.auth_code.authorize_url(:redirect_uri => oauth_gitlab_callback_url)
+      redirect_to oauth_client.auth_code.authorize_url(:redirect_uri => oauth_gitlab_callback_url, :scope => "read_user")
     else
       password_authentication
     end
@@ -20,7 +20,7 @@ class RedmineOauthController < AccountController
       redirect_to signin_path
     else
       token = oauth_client.auth_code.get_token(params[:code], :redirect_uri => oauth_gitlab_callback_url)
-      result = token.get( settings[:site]+'/api/v3/user')
+      result = token.get( settings[:site]+'/api/v4/user')
       info = JSON.parse(result.body)
       puts(info)
       puts("email : " + info["email"])
